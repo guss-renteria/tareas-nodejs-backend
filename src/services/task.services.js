@@ -30,7 +30,6 @@ const getFirstTask = async (tasks) => {
   return first;
 }
 const getLastTask = async (tasks) => {
-  console.log(tasks)
   return tasks.find(t => t.next === null);
 }
 
@@ -57,7 +56,14 @@ export const getTaskById = async (id) => {
 
 export const addTask = async (task) => {
   try {
-    const tasks = await getAllTasks();
+    let tasks = await getAllTasks();
+    // TODO: controla el limite
+    if(tasks.length >= 10) {
+      await writeTasks([]);
+    }
+
+    tasks = await getAllTasks();
+
     const last_task = await getLastTask(tasks);
     const new_id = (last_task ? Number(last_task.id) + 1 : 1);
     
