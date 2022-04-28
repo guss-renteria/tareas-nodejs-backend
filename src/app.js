@@ -17,6 +17,21 @@ app.use(express.json());
 app.use(cors());
 
 // ? agregar rutas
+app.get('/', function(req, res){
+    var options = {
+        root: path.join(__dirname)
+    };
+     
+    var fileName = 'public/index.html';
+    res.sendFile(fileName, options, function (err) {
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    });
+});
+//
 app.use(product_routes);
 
 // ? middlewares de error
