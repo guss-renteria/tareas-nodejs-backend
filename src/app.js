@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 
@@ -11,6 +12,7 @@ import { routes as product_routes } from './routes/task.routes';
 const app = express();
 
 // ? cargar middlewares en 'app'
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(cors());
 
